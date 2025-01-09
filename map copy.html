@@ -68,6 +68,10 @@
         overflow-x: hidden;
         transition: 0.25s;
       }
+
+      #routes-dropdown {
+        display: none;
+      }
     </style>
   </head>
 <body>
@@ -153,22 +157,52 @@
           document.getElementById(sidebar).style.width = "0px";
          }
     
-    fetch('./Routes.json')
-      .then(response => response.json()) // Parse the JSON
-      .then(data => {
-          const dropdown = document.getElementById('routes-dropdown');
+      document.addEventListener('DOMContentLoaded', function() {
+        fetch('Routes.json') // Replace with your JSON file path or API endpoint
+            .then(response => response.json())
+            .then(data => {
+                // Store the data in a variable or use it directly
+                window.jsonData = data;
+                // Call a function to use the data
+                populateDropdown(data);
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    });
 
-          // Loop through the data and create <option> elements
-          data.forEach(item => {
-              const option = document.createElement('option');
-              option.value = item.X1; // Set the value of the option
-              option.textContent = item.X1; // Set the display text
-              dropdown.appendChild(option); // Add the option to the dropdown
-          });
-      })
-      .catch(error => {
-          console.error('Error fetching JSON:', error);
-      });
+    var expanded = false;
+
+    function showCheckboxes() {
+      var checkboxes = document.getElementById("routes-dropdown");
+      if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+      } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+      }
+}
+
+    function populateDropdown(data) {
+      const dropdown = document.getElementById('routes-dropdown');
+
+      // Clear existing options (if any)
+      dropdown.innerHTML = '';
+
+      // Loop through the JSON data and create options
+      data.forEach(item => {
+          const li  = document.createElement('li');
+          const checkbox = document.createElement('input')
+          const label = document.createElement('label')
+          checkbox.type = 'checkbox';
+          checkbox.id = 'option-${item.id}';
+          label.textContent = item.X1; // Use the route name as the value
+          label.htmlFor = `option-${item.id}`;
+          li.appendChild(checkbox);
+          li.appendChild(label);
+          dropdown.appendChild(li);
+    });
+}
+
   </script>
   <div class = "sidepanel">
     <i class = "fas fa-bars fa-3x", onclick="openNav('sidepanel_menu')"></i>
@@ -179,9 +213,14 @@
     hello
   </div>
   <div class = "sidepanel_routes", id= "sidepanel_routes", onmouseleave=" closeNav('sidepanel_routes')">
-    <select id="routes-dropdown">
-      <option selected>Select a route</option>
-    </select>
+    <div class="custom-dropdown">
+      <button class="dropdown-button" onclick="showCheckboxes()">Select Options</button>
+      <div class="dropdown-content">
+          <ul id="routes-dropdown"></ul>
+      </div>
+  </div>
+
+    
   </div>
   <div class = "sidepanel_pathfind", id= "sidepanel_pathfind", onmouseleave=" closeNav('sidepanel_pathfind')">
     ohayoou
