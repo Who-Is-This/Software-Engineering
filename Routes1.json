@@ -15,5 +15,33 @@
       ["7.094439", "125.614167", "J.P. Laurel Ave. Davao City"],
       ["7.1920878", "125.6024989", "Acacia Davao City"]
     ]
+  },
+  {
+    "X1": "ALAMBRE ROUTE",
+    "lat_long": [
+      ["7.0187546", "125.4974411", "Toril Davao City"],
+      ["7.0516591", "125.5400755", "Puan Davao City"],
+      ["7.2889517", "125.4196644", "Ulas Davao City"],
+      ["7.3355486", "125.3391398", "Bangkal Davao City"],
+      ["7.05988182572885", "125.551354764471", "MacArthur Highway Davao City"],
+      ["7.0617824", "125.5929889", "Matina Davao City"],
+      ["7.06582445", "125.601739254894", "Generoso Bridge Davao City"],
+      ["7.07263469642112", "125.608179937153", "Quirino Ave. Davao City"],
+      ["7.07000668113359", "125.607597711472", "Camus St. Davao City"],
+      ["7.06762065", "125.61794315", "Bonifacio St. Davao City"],
+      ["7.06359190267918", "125.609705891354", "C.M. Recto Ave. Davao City"],
+      ["7.06359190267918", "125.609705891354", "Claveria Davao City"],
+      ["7.07070345120432", "125.613415381358", "Roxas Ave. Davao City"],
+      ["7.0707245370135", "125.620779786744", "Quezon Blvd. Davao City"],
+      ["7.05790435", "125.6048654", "Bolton Bridge Davao City"],
+      ["7.0514346100061", "125.589223225566", "Quimpo Blvd. Davao City"],
+      ["7.05988182572885", "125.551354764471", "MacArthur Highway Davao City"],
+      ["7.0617824", "125.5929889", "Matina Davao City"],
+      ["7.3355486", "125.3391398", "Bangkal Davao City"],
+      ["7.2889517", "125.4196644", "Ulas Davao City"],
+      ["7.0516591", "125.5400755", "Puan Davao City"],
+      ["7.0187546", "125.4974411", "Toril Davao City"],
+      ["7.060412", "125.4712258", "Alambre Davao City"]
+    ]
   }
 ]

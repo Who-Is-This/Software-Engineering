@@ -43,8 +43,12 @@
         top: 0;
         left: 0;
         background-color: #ffffff;
-        overflow-x: hidden;
+        overflow: hidden;
         transition: 0.25s;
+      }
+      .sidepanel_routes.open {
+        width: 250px;
+        overflow: auto;
       }
       .sidepanel_pathfind{
         height:100%;
@@ -68,75 +72,99 @@
         overflow-x: hidden;
         transition: 0.25s;
       }
+      .RouteList{
+        display: block;
+        border: 1px solid red;
+        font-family: Arial;
+        margin:auto;
+        width: 50%;
+        padding: 10px;
+        transition: 0.3s;
+      }
     </style>
   </head>
 <body>
-  <div id="map", class = "map">
-  </div> 
-  <script>
-         var mapOptions = {
-            center: [17.385044, 78.486671],
-            zoom: 10,
-            zoomControl: false
-         }
-         var map = new L.map('map', mapOptions);
-         
-         var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-         map.addLayer(layer);
-         
-         var zoomOptions = {
-          position: 'bottomright'
-         };
-         var zoom = L.control.zoom(zoomOptions);
-         zoom.addTo(map); 
+<div id="map", class = "map">
+</div> 
+<script>
+var mapOptions = {
+  center: [17.385044, 78.486671],
+  zoom: 10,
+  zoomControl: false
+}
+var map = new L.map('map', mapOptions);
 
-    fetch('http://localhost:8000/Routes1.json')
-    .then(response => {
-      if(!response.ok){
-        throw new Error('Network response was not ok: ${response.status}' ); 
-      }
-      return response.json();
-    }) 
+var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+map.addLayer(layer);
 
-    .then(data => {
-      data.forEach(route => {
-        const filtered = route.lat_long.filter(([lat, lng]) => lat && lng);
-        const waypoints = filtered.map(([lat, lng, name]) => {
-          return L.Routing.waypoint(L.latLng(parseFloat(lat), parseFloat(lng)), name);
-        });
-      L.Routing.control({
-        waypoints: waypoints,
-        routeWhileDragging: true,
-        createMarker: (i, waypoints, n) => {
-          return L.marker(waypoints.latLng).bindPopup(waypoints.name).openPopup();
-          }
-        }).addTo(map);
-      });
-    })
-    .catch((error) => {
-      console.error('Error retrieving routing data', error);
+var zoomOptions = {
+  position: 'bottomright'
+};
+var zoom = L.control.zoom(zoomOptions);
+zoom.addTo(map); 
+
+fetch('http://localhost:8000/Routes1.json')
+.then(response => {
+  if(!response.ok){
+    throw new Error('Network response was not ok: ${response.status}' ); 
+  }
+  return response.json();
+}) 
+
+.then(data => {
+  const list = document.getElementById('Routes');
+  data.forEach(route => {
+    const listItem = document.createElement('li');
+    listItem.textContent = route.X1;
+    const waypoints = route.lat_long.map(([lat, lng, name]) => {
+      return L.Routing.waypoint(L.latLng(parseFloat(lat), parseFloat(lng)), name);
     });
+    list.appendChild(listItem)
+    displayRoute(waypoints);
+  });
+})
+.catch((error) => {
+  console.error('Error retrieving routing data', error);
+});
 
-         function openNav(){
-          document.getElementById("sidepanel_menu").style.width = "250px";
-         }
+function toggleNav(sidebarId) {
+  const panel = document.getElementById(sidebarId);
+  panel.classList.toggle('open'); 
+}
 
-         function closeNave(sidebar){
-          document.getElementById(sidebar).style.width = "0px";
-         }
-  </script>
+function openNav(){
+  document.getElementById("sidepanel_menu").style.width = "250px";
+}
+
+function closeNav(sidebar){
+  document.getElementById(sidebar).style.width = "0px";
+}
+
+function displayRoute(waypoints){
+  L.Routing.control({
+    waypoints: waypoints,
+    routeWhileDragging: true,
+    createMarker: (i, waypoints, n) => {
+      return L.marker(waypoints.latLng).bindPopup(waypoints.name).openPopup();
+    }
+  }).addTo(map);
+}
+</script>
   <div class = "sidepanel">
     <i class = "fas fa-bars fa-3x", onclick="openNav('sidepanel_menu')"></i>
     <i class = "fas fa-car-alt fa-3x", onclick="openNav('sidepanel_routes')"></i>
     <i class = "fas fa-route fa-3x", onclick="openNav('sidepanel_pathfind')"></i>
   </div>
   <div class = "sidepanel_menu", id = "sidepanel_menu">
+    <i class = "fa fa-close", onclick="closeNav('sidepanel_menu')"></i>
 
   </div>
-  <div class = "sidepanel_routes", id= "sidepanel_routes">
-
+  <div class = "sidepanel_routes" id= "sidepanel_routes">
+    <i class = "fa fa-close" onclick="closeNav('sidepanel_routes')"></i>
+    <ul class = "RouteList" id = "Routes"></ul>
   </div>
   <div class = "sidepanel_pathfind", id= "sidepanel_pathfind">
+    <i class = "fa fa-close", onclick="closeNav('sidepanel_pathfind')"></i>
 
   </div>
 </body>
