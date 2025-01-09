@@ -98,7 +98,43 @@
         latLng: L.latLng(7.1279069, 125.6194761),
         name: "Cabantian Davao City",
       },
-      // More waypoints...
+      {
+        latLng: L.latLng(7.1086829, 125.61333355742),
+        name: "Buhangin Underpass Davao City",
+      },
+      {
+        latLng: L.latLng(7.10853571795384, 125.61336106349),
+        name: "Buhangin Road Davao City",
+      },
+      {
+        latLng: L.latLng(7.10243370201174, 125.636924664036),
+        name: "J.P. Laurel Ave. Davao City",
+      },
+      {
+        latLng: L.latLng(7.0738629410117, 125.612629400552),
+        name: "R. Magsaysay Ave Davao City",
+      },
+      {
+        latLng: L.latLng(7.06727480360635, 125.609251750273),
+        name: "C. Bangoy St. Davao City",
+      },
+      {
+        latLng: L.latLng(7.066376, 125.606770),
+        name: "San Pedro St. Davao City",
+      },
+      {
+        latLng: L.latLng(7.07318141336732, 125.600572115362),
+        name: "Fr. Selga St. Davao City",
+      },
+      {
+        latLng: L.latLng(7.08162480968812, 125.610675962654),
+        name: "F. Torres St Davao City",
+      },
+      {
+        latLng: L.latLng(7.10243370201174, 125.636924664036),
+        name: "J.P. Laurel Ave. Davao City",
+      }
+
     ];
 
       L.Routing.control({
@@ -109,27 +145,46 @@
           }
         }).addTo(map);
 
-         function openNav(){
-          document.getElementById("sidepanel_menu").style.width = "250px";
+         function openNav(sidepanel){
+          document.getElementById(sidepanel).style.width = "250px";
          }
 
-         function closeNave(sidebar){
+         function closeNav(sidebar){
           document.getElementById(sidebar).style.width = "0px";
          }
+    
+    fetch('./Routes.json')
+      .then(response => response.json()) // Parse the JSON
+      .then(data => {
+          const dropdown = document.getElementById('routes-dropdown');
+
+          // Loop through the data and create <option> elements
+          data.forEach(item => {
+              const option = document.createElement('option');
+              option.value = item.X1; // Set the value of the option
+              option.textContent = item.X1; // Set the display text
+              dropdown.appendChild(option); // Add the option to the dropdown
+          });
+      })
+      .catch(error => {
+          console.error('Error fetching JSON:', error);
+      });
   </script>
   <div class = "sidepanel">
     <i class = "fas fa-bars fa-3x", onclick="openNav('sidepanel_menu')"></i>
     <i class = "fas fa-car-alt fa-3x", onclick="openNav('sidepanel_routes')"></i>
     <i class = "fas fa-route fa-3x", onclick="openNav('sidepanel_pathfind')"></i>
   </div>
-  <div class = "sidepanel_menu", id = "sidepanel_menu">
-
+  <div class = "sidepanel_menu", id = "sidepanel_menu", onmouseleave=" closeNav('sidepanel_menu')">
+    hello
   </div>
-  <div class = "sidepanel_routes", id= "sidepanel_routes">
-
+  <div class = "sidepanel_routes", id= "sidepanel_routes", onmouseleave=" closeNav('sidepanel_routes')">
+    <select id="routes-dropdown">
+      <option selected>Select a route</option>
+    </select>
   </div>
-  <div class = "sidepanel_pathfind", id= "sidepanel_pathfind">
-
+  <div class = "sidepanel_pathfind", id= "sidepanel_pathfind", onmouseleave=" closeNav('sidepanel_pathfind')">
+    ohayoou
   </div>
 </body>
 </html>
