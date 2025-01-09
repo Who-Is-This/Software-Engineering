@@ -78,76 +78,15 @@
   <div id="map", class = "map">
   </div> 
   <script>
-         var mapOptions = {
-            center: [17.385044, 78.486671],
-            zoom: 10,
-            zoomControl: false
-         }
-         var map = new L.map('map', mapOptions);
-         
-         var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-         map.addLayer(layer);
+         const map = L.map('map').setView([7.1072857, 125.5946292], 11);
+         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
          
          var zoomOptions = {
           position: 'bottomright'
          };
          var zoom = L.control.zoom(zoomOptions);
          zoom.addTo(map); 
-    const waypoints = [
-      {
-        latLng: L.latLng(7.1672857, 125.5946292),
-        name: "Indangan Davao City",
-      },
-      {
-        latLng: L.latLng(7.1279069, 125.6194761),
-        name: "Cabantian Davao City",
-      },
-      {
-        latLng: L.latLng(7.1086829, 125.61333355742),
-        name: "Buhangin Underpass Davao City",
-      },
-      {
-        latLng: L.latLng(7.10853571795384, 125.61336106349),
-        name: "Buhangin Road Davao City",
-      },
-      {
-        latLng: L.latLng(7.10243370201174, 125.636924664036),
-        name: "J.P. Laurel Ave. Davao City",
-      },
-      {
-        latLng: L.latLng(7.0738629410117, 125.612629400552),
-        name: "R. Magsaysay Ave Davao City",
-      },
-      {
-        latLng: L.latLng(7.06727480360635, 125.609251750273),
-        name: "C. Bangoy St. Davao City",
-      },
-      {
-        latLng: L.latLng(7.066376, 125.606770),
-        name: "San Pedro St. Davao City",
-      },
-      {
-        latLng: L.latLng(7.07318141336732, 125.600572115362),
-        name: "Fr. Selga St. Davao City",
-      },
-      {
-        latLng: L.latLng(7.08162480968812, 125.610675962654),
-        name: "F. Torres St Davao City",
-      },
-      {
-        latLng: L.latLng(7.10243370201174, 125.636924664036),
-        name: "J.P. Laurel Ave. Davao City",
-      }
-
-    ];
-
-      L.Routing.control({
-        waypoints: waypoints,
-        routeWhileDragging: true,
-        createMarker: (i, waypoints, n) => {
-          return L.marker(waypoints.latLng).bindPopup(waypoints.name).openPopup();
-          }
-        }).addTo(map);
+    
 
          function openNav(sidepanel){
           document.getElementById(sidepanel).style.width = "250px";
@@ -157,16 +96,18 @@
           document.getElementById(sidebar).style.width = "0px";
          }
     
-      document.addEventListener('DOMContentLoaded', function() {
-        fetch('Routes.json') // Replace with your JSON file path or API endpoint
-            .then(response => response.json())
-            .then(data => {
-                // Store the data in a variable or use it directly
-                window.jsonData = data;
-                // Call a function to use the data
-                populateDropdown(data);
-            })
-            .catch(error => console.error('Error fetching JSON:', error));
+    let jsonData = [];
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('Routes.json') // Replace with your JSON file path or API endpoint
+          .then(response => response.json())
+          .then(data => {
+              // Store the data in a variable or use it directly
+              jsonData = data;
+              // Call a function to use the data
+              populateDropdown();
+          })
+          .catch(error => console.error('Error fetching JSON:', error));
     });
 
     var expanded = false;
@@ -180,49 +121,110 @@
         checkboxes.style.display = "none";
         expanded = false;
       }
-}
+    }
 
-    function populateDropdown(data) {
+    
+
+    function populateDropdown() {
       const dropdown = document.getElementById('routes-dropdown');
 
       // Clear existing options (if any)
       dropdown.innerHTML = '';
 
       // Loop through the JSON data and create options
-      data.forEach(item => {
+      jsonData.forEach((item, index) => {
           const li  = document.createElement('li');
           const checkbox = document.createElement('input')
           const label = document.createElement('label')
           checkbox.type = 'checkbox';
-          checkbox.id = 'option-${item.id}';
-          label.textContent = item.X1; // Use the route name as the value
-          label.htmlFor = `option-${item.id}`;
+          checkbox.id = item.X1;
+          checkbox.addEventListener('change', updateRoutes);
+          label.textContent = item.X1; 
+          label.htmlFor = item.X1;
           li.appendChild(checkbox);
           li.appendChild(label);
           dropdown.appendChild(li);
     });
-}
+    }
 
+
+    
+    function updateCheckedCheckboxes() {
+      checkedCheckboxes = [];
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+          checkedCheckboxes.push(checkbox.id);
+        }
+      });
+      console.log(`Checked checkboxes: ${checkedCheckboxes}`);
+    }
+
+    let activeRoutes = [];
+
+    // Update routes when checkboxes are checked/unchecked
+    function updateRoutes(){
+      activeRoutes.forEach((route)=> map.removeControl(route));
+      activeRoutes = [];
+      // Get all checked checkboxes
+      const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+      // Create new routes for checked checkboxes
+      checkedCheckboxes.forEach((checkbox) => {
+        const routeData = jsonData[jsonData.findIndex(function(item, i ){
+          return item.X1 === checkbox.id
+        })];
+
+        // Convert lat/long strings to LatLng objects
+        const waypoints = routeData.lat_long.map((item) => L.latLng(item[0], item[1]));
+
+        // Create a new route and add it to the map
+        const route = L.Routing.control({
+          waypoints: waypoints,
+          router: L.Routing.osrmv1({
+            serviceUrl: 'https://router.project-osrm.org/route/v1',
+          }),
+          lineOptions: {
+            styles: [{ color: getRandomColor(), weight: 5 }], // Random color for each route
+          },
+        }).addTo(map);
+
+        // Store the route for later removal
+        activeRoutes.push(route);
+      });
+
+    }
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
   </script>
   <div class = "sidepanel">
     <i class = "fas fa-bars fa-3x", onclick="openNav('sidepanel_menu')"></i>
     <i class = "fas fa-car-alt fa-3x", onclick="openNav('sidepanel_routes')"></i>
     <i class = "fas fa-route fa-3x", onclick="openNav('sidepanel_pathfind')"></i>
   </div>
-  <div class = "sidepanel_menu", id = "sidepanel_menu", onmouseleave=" closeNav('sidepanel_menu')">
+  <div class = "sidepanel_menu", id = "sidepanel_menu">
+    <i class="fa fa-times", onclick=" closeNav('sidepanel_menu')"></i>
     hello
   </div>
-  <div class = "sidepanel_routes", id= "sidepanel_routes", onmouseleave=" closeNav('sidepanel_routes')">
+  <div class = "sidepanel_routes", id= "sidepanel_routes">
+    <i class="fa fa-times", onclick=" closeNav('sidepanel_routes')"></i>
     <div class="custom-dropdown">
-      <button class="dropdown-button" onclick="showCheckboxes()">Select Options</button>
+      <button class="dropdown-button" onclick="showCheckboxes()">Select Routes</button>      
       <div class="dropdown-content">
-          <ul id="routes-dropdown"></ul>
+          <ul id="routes-dropdown">
+          </ul>
       </div>
   </div>
-
-    
   </div>
-  <div class = "sidepanel_pathfind", id= "sidepanel_pathfind", onmouseleave=" closeNav('sidepanel_pathfind')">
+  <div class = "sidepanel_pathfind", id= "sidepanel_pathfind">
+    <i class="fa fa-times", onclick=" closeNav('sidepanel_pathfind')"></i>
     ohayoou
   </div>
 </body>
