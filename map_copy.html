@@ -175,8 +175,11 @@
           return item.X1 === checkbox.id
         })];
 
-        // Convert lat/long strings to LatLng objects
-        const waypoints = routeData.lat_long.map((item) => L.latLng(item[0], item[1]));
+        // Convert routeData to waypoint object
+        const filtered = routeData.lat_long.filter(([lat, lng]) => lat && lng);
+        const waypoints = filtered.map(([lat, lng, name]) => {
+          return L.Routing.waypoint(L.latLng(parseFloat(lat), parseFloat(lng)), name);
+        });
 
         // Create a new route and add it to the map
         const route = L.Routing.control({
@@ -187,6 +190,9 @@
           lineOptions: {
             styles: [{ color: getRandomColor(), weight: 5 }], // Random color for each route
           },
+          createMarker: (i, waypoints, n) => {
+          return L.marker(waypoints.latLng).bindPopup(waypoints.name).openPopup();
+          }//return null if waypoint marker is not needed.
         }).addTo(map);
 
         // Store the route for later removal
@@ -195,7 +201,15 @@
 
     }
 
+    const predefinedColors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF'];
+
+    // Randomly select one of the 5 colors
     function getRandomColor() {
+        return predefinedColors[Math.floor(Math.random() * 5)];
+    }
+
+    //Randomize all colors
+    function getRandomColor2() {
         const letters = '0123456789ABCDEF';
         let color = '#';
         for (let i = 0; i < 6; i++) {

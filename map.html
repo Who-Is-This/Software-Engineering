@@ -79,10 +79,26 @@
             zoom: 10,
             zoomControl: false
          }
+         
+         
          var map = new L.map('map', mapOptions);
          
          var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
          map.addLayer(layer);
+         map.on('click', function(e) {
+    // Get the latitude and longitude from the event object
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+
+    // Display the latitude and longitude in a popup
+    L.popup()
+        .setLatLng(e.latlng)
+        .setContent("Latitude: " + lat + "<br>Longitude: " + lng)
+        .openOn(map);
+
+    // Optionally, log the coordinates to the console
+    console.log("Latitude: " + lat + ", Longitude: " + lng);
+});
          
          var zoomOptions = {
           position: 'bottomright'
@@ -90,7 +106,7 @@
          var zoom = L.control.zoom(zoomOptions);
          zoom.addTo(map); 
 
-    fetch('http://localhost:8000/Routes1.json')
+    fetch('./test_route.json')
     .then(response => {
       if(!response.ok){
         throw new Error('Network response was not ok: ${response.status}' ); 
