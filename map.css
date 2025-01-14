@@ -1,0 +1,72 @@
+html, body{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.map{
+    height:100%; 
+    z-index: 1;
+}
+.sidepanel{
+    height:100%;
+    width: 70px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.25s;
+}
+i{
+    margin:auto;
+    width: 50%;
+    padding: 10px;
+    transition: 0.3s;
+}
+i:hover{
+    color: #f1f1f1;
+}
+.sidepanel_routes{
+    height:100%;
+    width: 0px;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.25s;
+}
+.sidepanel_pathfind{
+    height:100%;
+    width: 0px;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.25s;
+}
+.sidepanel_menu{
+    height:100%;
+    width: 0px;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.25s;
+}
+
+.routes-content{
+    margin-left: 1rem;
+}
+
+.routes-dropdown {
+    display: none;
+    list-style-type: none;
+    padding-left: 1rem;
+}
