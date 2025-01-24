@@ -310,23 +310,21 @@
   {
     "X1": "BUHANGIN VIA DACUDAO AVENUE ROUTE",
     "lat_long": [
-      ["7.10853571795384", "125.61336106349", "Buhangin Road Davao City"],
-      ["7.09121483887502", "125.618013184116", "Dacudao Ave. Davao City"],
-      ["6.74637185", "125.35661815", "Vinzon St. Davao City"],
-      ["7.08440704301463", "125.62428211851", "Cabaguio Ave. Davao City"],
-      ["7.08398355", "125.624409778161", "Agdao Flyover Davao City"],
-      ["7.07552037863681", "125.625187883549", "Leon Garcia St. Davao City"],
-      ["7.07356294101178", "125.612629400552", "R. Magsaysay Ave Davao City"],
-      ["7.113769", "125.5905415", "Uyanguren Davao City"],
+      ["7.115052356", "125.6237697601", "Buhangin Road Davao City"],
+      ["7.090586696", "125.61823368137", "Dacudao Ave. Davao City"],
+      ["7.087520412560", "125.62264323234", "Vinzon St. Davao City"],
+      ["7.08743523706", "125.623748302459", "Cabaguio Ave. Davao City"],
+      ["7.0841932582", "125.62437057495", "Agdao Flyover Davao City"],
+      ["7.078422584968", "125.62487483024", "Leon Garcia St. Davao City"],
+      ["7.074211651420", "125.62272906303", "R. Magsaysay Ave (Uyanguren) Davao City"],
       ["7.07625059898921", "125.620677580079", "Gempesaw St. Davao City"],
       ["7.077023417042", "125.62115074216", "Santa Ana Avenue Davao City"],
-      ["7.31986467204802", "125.683238405819", "Bangoy St. Davao City"],
-      ["7.08300710705081", "125.624149594386", "Lapu-Lapu St. Davao City"],
-      ["7.08440704301463", "125.62428211851", "Cabaguio Ave. Davao City"],
-      ["6.74637185", "125.35661815", "Vinzon St. Davao City"],
-      ["7.09121483887502", "125.618013184116", "Dacudao Ave. Davao City"],
-      ["7.10853571795384", "125.61336106349", "Buhangin Road Davao City"],
-      ["7.10853571795384", "125.61336106349", "Buhangin Road Davao City"]
+      ["7.0790560858", "125.62271833419", "F. Bangoy St. Davao City"],
+      ["7.082910301176", "125.6239950656", "Lapu-Lapu St. Davao City"],
+      ["7.08743523706", "125.623748302459", "Cabaguio Ave. Davao City"],
+      ["7.087520412560", "125.62264323234", "Vinzon St. Davao City"],
+      ["7.09176848822", "125.6176114082", "Dacudao Ave. Davao City"],
+      ["7.115052356", "125.6237697601", "Buhangin Road Davao City"]
     ]
   },
   {

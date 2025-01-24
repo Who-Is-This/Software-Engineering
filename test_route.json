@@ -1,18 +1,22 @@
 [
   {
-    "X1": "BRGY. COMMUNAL - BANKEROHAN ROUTE",
+    "X1": "BUHANGIN VIA DACUDAO AVENUE ROUTE",
     "lat_long": [
-      ["7.15038579178", "125.6289893388", "Communal Davao City"],
-      ["7.10853571795384", "125.61336106349", "Buhangin Road Davao City"],
-      ["7.094439", "125.614167", "J.P. Laurel Ave. Davao City"],
-      ["7.06727480360635", "125.609251750273", "C. Bangoy St. Davao City"],
-      ["7.065800316482", "125.60754776000", "San Pedro St. Davao City"],
-      ["7.069452345273", "125.6021404266", "Bankerohan Davao City"],
-      ["7.06725551283313", "125.603886917163", "A. Pichon St Davao City"],
-      ["7.06359190267918", "125.609705891354", "C.M. Recto Ave. Davao City"],
-      ["7.094439", "125.614167", "J.P. Laurel Ave. Davao City"],
-      ["7.10853571795384", "125.61336106349", "Buhangin Road Davao City"],
-      ["7.15038579178", "125.6289893388", "Communal Davao City"]
+      ["7.115052356", "125.6237697601", "Buhangin Road Davao City"],
+      ["7.090586696", "125.61823368137", "Dacudao Ave. Davao City"],
+      ["7.087520412560", "125.62264323234", "Vinzon St. Davao City"],
+      ["7.08743523706", "125.623748302459", "Cabaguio Ave. Davao City"],
+      ["7.0841932582", "125.62437057495", "Agdao Flyover Davao City"],
+      ["7.078422584968", "125.62487483024", "Leon Garcia St. Davao City"],
+      ["7.074211651420", "125.62272906303", "R. Magsaysay Ave (Uyanguren) Davao City"],
+      ["7.07625059898921", "125.620677580079", "Gempesaw St. Davao City"],
+      ["7.077023417042", "125.62115074216", "Santa Ana Avenue Davao City"],
+      ["7.0790560858", "125.62271833419", "F. Bangoy St. Davao City"],
+      ["7.082910301176", "125.6239950656", "Lapu-Lapu St. Davao City"],
+      ["7.08743523706", "125.623748302459", "Cabaguio Ave. Davao City"],
+      ["7.087520412560", "125.62264323234", "Vinzon St. Davao City"],
+      ["7.09176848822", "125.6176114082", "Dacudao Ave. Davao City"],
+      ["7.115052356", "125.6237697601", "Buhangin Road Davao City"]
     ]
   }
 ]
