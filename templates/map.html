@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jeep</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="./static/map.css">
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://kit.fontawesome.com/5e650e79fe.js" crossorigin="anonymous"></script>
+  </head>
+<body>
+  <div id="map", class = "map"></div> 
+  <!-- Floating Search Bar and Menu -->
+  <div class="container">
+      <div class="tab-container">
+          <button class="tab active", onclick="switchSearch(this)"><i class = "fas fa-route fa-2x"></i></button>
+          <button class="tab inactive", onclick="switchRoutes(this)"><i class = "fas fa-car fa-2x"></i></button>
+      </div>
+      <div class="panel-container">
+        <div id="search-panel" class="search-panel">
+          <div class="input-box">
+            <input type="text" class="input" placeholder="Choose starting point">
+            <hr>
+            <input type="text" class="input" placeholder="Choose destination">
+          </div>
+        </div>
+        <div id="routes-panel" class="routes-panel">
+          <div class="input-box">
+            <div class="dropdown-content">
+              <ul class="routes-dropdown" id="routes-dropdown"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script src="./static/map.js"></script>
+</body>
+</html>

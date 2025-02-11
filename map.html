@@ -4,7 +4,7 @@
     <title>Jeep</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-    <link rel="stylesheet" href="map.css">
+    <link rel="stylesheet" href="./static/map.css">
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script src="https://kit.fontawesome.com/5e650e79fe.js" crossorigin="anonymous"></script>
@@ -16,6 +16,19 @@
     <i class = "fas fa-car-alt fa-3x", onclick="openNav('sidepanel_routes')"></i>
     <i class = "fas fa-route fa-3x", onclick="openNav('sidepanel_pathfind')"></i>
   </div>
+  <!-- Floating Search Bar and Menu -->
+  <div class="container">
+      <div class="tab-container">
+          <button class="tab active"><i class = "fas fa-route fa-2x"></i></button>
+          <button class="tab inactive"><i class = "fas fa-car-alt fa-2x"></i></button>
+      </div>
+      <div class="input-box">
+          <input type="text" class="input" placeholder="Choose starting point">
+          <hr>
+          <input type="text" class="input" placeholder="Choose destination">
+      </div>
+  </div>
+
   <div class = "sidepanel_menu", id = "sidepanel_menu">
     <i class="fa fa-times", onclick=" closeNav('sidepanel_menu')"></i>
     hello
@@ -24,7 +37,6 @@
     <i class="fa fa-times", onclick=" closeNav('sidepanel_routes')"></i>
     <div class="custom-dropdown">
       <div class="dropdown-content">
-        <button class="dropdown-button" onclick="showCheckboxes()">Select Routes</button>      
         <ul class="routes-dropdown" id="routes-dropdown"></ul>
       </div>
   </div>
@@ -33,6 +45,6 @@
     <i class="fa fa-times", onclick=" closeNav('sidepanel_pathfind')"></i>
     ohayoou
   </div>
-  <script src="map.js"></script>
+  <script src="./static/map.js"></script>
 </body>
 </html>

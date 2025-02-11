@@ -1,0 +1,131 @@
+html, body{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.map{
+    height:100%; 
+    z-index: 1;
+}
+
+
+.routes-dropdown {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    font-size: 14px;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    gap: 8px; /* Adjust space between checkbox and label */
+    padding: 5px 0;
+}
+
+li label {
+    width: 100%;
+    padding-top: .3rem;
+    color: #000000;
+    font-weight: lighter;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background: rgba( 255, 255, 255, 0.8 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    position: absolute;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem;
+    width: 300px;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.tab-container {
+    display: flex;
+    margin-bottom: 12px;
+    justify-content: space-between; /* Evenly spaces buttons */
+    gap: 10px; /* Adds space between buttons */
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+.tab.active {
+    background: #007bff;
+    color: white;
+}
+
+.tab.active:hover {
+    background: #0065d1;
+    color: white;
+}
+
+.tab.inactive {
+    background: #ddd;
+    color: #666;
+}
+.tab.inactive:hover {
+    background: #adadad;
+    color: #666;
+}
+
+.tab button:hover{
+    color:red;
+}
+
+.panel-container{
+    display: flex;
+}
+
+.routes-panel {
+    width: 0%;
+    display: none;
+    transition: 0.25s;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+.search-panel {
+    width: 100%;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+.input-box {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input-box label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    
+}
+.input {
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
